@@ -3,6 +3,8 @@ const planets = require('./planets.mongo');
 
 const launches = new Map();
 
+const DEFUALT_FLIGHT_NUMBER = 100;
+
 let latestFlightNumber = 100;
 
 const launch = {
@@ -39,22 +41,32 @@ saveLaunches(launch);
 const existsLaunchWithId = (launchId) => {
   return launches.has(launchId);
 }
-
 const getAllLaunches = async () => {
   return await launchesDatabase
     .find({}, {'_id': 0, '__v': 0});
 }
 
-const addNewLaunch = (launch) => {
-  latestFlightNumber++;
-  launches.set(
-    latestFlightNumber,
-    Object.assign(launch, {
-      success: true,
-      upcoming: true,
-      customers: ['Zero to Mastery', 'NASA'],
-      flightNumber: latestFlightNumber
-    }))
+const getLatestFlightNumber = async () => {
+  const latestLaunch = await launchesDatabase
+    .findOne()
+    .sort('-flightNumber')
+
+  if (!latestLaunch) return DEFUALT_FLIGHT_NUMBER;
+  
+  return latestLaunch.flightNumber;
+}
+
+const scheduleNewLaunch = async (launch) => {
+  const newFlightNumber = await getLatestFlightNumber() + 1;
+
+  const newLaunch = Object.assign(launch, {
+    success: true,
+    upcoming: true,
+    customers: ['Zero to Mastery', 'NASA'],
+    flightNumber: newFlightNumber
+  })
+
+  await saveLaunches(newLaunch);
 }
 
 const abortLaunchById = (launchId) => {
@@ -66,7 +78,7 @@ const abortLaunchById = (launchId) => {
 
 module.exports = {
   getAllLaunches,
-  addNewLaunch,
+  scheduleNewLaunch,
   existsLaunchWithId,
   abortLaunchById
 }
