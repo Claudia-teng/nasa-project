@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "watch": "nodemon src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "cluster": "pm2 start src/server.js -i max"
   },
   "keywords": [],
@@ -20,6 +20,8 @@
     "pm2": "^5.1.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13"
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.13",
+    "supertest": "^6.2.1"
   }
 }
