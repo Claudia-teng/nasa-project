@@ -4,8 +4,10 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "watch": "nodemon src/server.js",
     "test": "jest",
+    "test-watch": "jest --watch",
+    "watch": "nodemon src/server.js",
+    "start": "node src/server.js",
     "cluster": "pm2 start src/server.js -i max"
   },
   "keywords": [],

@@ -74,7 +74,7 @@ const abortLaunchById = async (launchId) => {
     success: false
   })
 
-  return aborted.acknowledged && aborted.modifiedCount === 1;
+  return aborted.modifiedCount === 1;
 }
 
 module.exports = {
