@@ -14,7 +14,7 @@ const httpAddNewLaunch = async (req, res) => {
 
   if (!launch.mission || !launch.rocket || !launch.launchDate || !launch.target) {
     return res.status(400).json({
-      error: 'Missing require launch property!'
+      error: 'Missing required launch property'
     });
   }
 
