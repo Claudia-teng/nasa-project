@@ -1,8 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const planetsRouter = require('./routes/planet/planet.routers');
-const launchesRouter = require('./routes/launches/launches.routers');
+const api = require('./routes/api');
 
 const app = express();
 app.use(cors({
@@ -10,7 +9,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
-app.use('/planets', planetsRouter);
-app.use('/launches', launchesRouter);
+
+app.use('/v1', api);
 
 module.exports = app;
