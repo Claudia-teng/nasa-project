@@ -40,22 +40,21 @@ async function getAllPlanets() {
   });
 }
 
-async function savePlanets(planets) {
+async function savePlanets(planet) {
   try {
     await planets.updateOne({
       // find
-      keplerName: planets.kepler_name,
+      keplerName: planet.kepler_name,
     }, {
       // update
-      keplerName: planets.kepler_name,
-    },{
+      keplerName: planet.kepler_name,
+    }, {
       // insert
-      upsert: true
+      upsert: true,
     });
-  } catch (err) {
-    // console.log(`Could not save planet ${err}`)
+  } catch(err) {
+    console.error(`Could not save planet ${err}`);
   }
-
 }
 
 module.exports = {
