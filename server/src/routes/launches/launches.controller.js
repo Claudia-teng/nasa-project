@@ -9,13 +9,13 @@ const {
   getPagination
 } = require('../../services/query');
 
-const httpGetAllLaunches = async (req, res) => {
+async function httpGetAllLaunches(req, res) {
   const { skip, limit } = getPagination(req.query);
   const launches = await getAllLaunches(skip, limit);
   return res.status(200).json(await launches);
 }
 
-const httpAddNewLaunch = async (req, res) => {
+async function httpAddNewLaunch(req, res) {
   const launch = req.body;
 
   if (!launch.mission || !launch.rocket || !launch.launchDate || !launch.target) {
@@ -35,7 +35,7 @@ const httpAddNewLaunch = async (req, res) => {
   return res.status(201).json(launch);
 }
 
-const httpAbortLaunch = async (req, res) => {
+async function httpAbortLaunch(req, res) {
   const launchId = +req.params.id
   const existLaunce = await existsLaunchWithId(launchId);
 

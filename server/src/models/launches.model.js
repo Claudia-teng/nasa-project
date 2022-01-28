@@ -70,7 +70,7 @@ async function loadLaunchData() {
   }
 }
 
-const saveLaunches = async (launch) => {
+async function saveLaunches(launch) {
   await launchesDatabase.findOneAndUpdate({
     flightNumber: launch.flightNumber
   }, launch, {
@@ -96,7 +96,7 @@ async function getAllLaunches(skip, limit) {
     .limit(limit)
 }
 
-const getLatestFlightNumber = async () => {
+async function getLatestFlightNumber() {
   const latestLaunch = await launchesDatabase
     .findOne()
     .sort('-flightNumber')
@@ -106,7 +106,7 @@ const getLatestFlightNumber = async () => {
   return latestLaunch.flightNumber;
 }
 
-const scheduleNewLaunch = async (launch) => {
+async function scheduleNewLaunch(launch) {
   const planet = await planets.findOne({
     keplerName: launch.target,
   });
@@ -127,7 +127,7 @@ const scheduleNewLaunch = async (launch) => {
   await saveLaunches(newLaunch);
 }
 
-const abortLaunchById = async (launchId) => {
+async function abortLaunchById (launchId) {
   const aborted = await launchesDatabase.updateOne({
     flightNumber: launchId
   }, {
