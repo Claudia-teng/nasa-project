@@ -16,5 +16,4 @@ NASA mission control system to search for real-time launching data.
 - Use NASA Open APIs to get real-time launching data.
 - Use MongoDB Atlas and mongoose to complete CRUD features.
 
-<img width="50%" src="./docs/readme/index"/>
-<img width="50%" src="./docs/readme/history"/>
+<img width="50%" src="./docs/readme/index.png"/>
